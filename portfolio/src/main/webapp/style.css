@@ -1,4 +1,4 @@
-body{
+body {
   background-color: #abbed6;
 }
 
@@ -14,19 +14,19 @@ body{
   margin-top: 20px;
 }
 
-img{
+img {
   display: block;
   margin-left: auto;
   margin-right: auto;
   width: 300px;
 }
 
-h1, h2{
+h1, h2 {
   text-align: center;
 }
 
 /*-------- randomizer button and text-------*/
-button{
+button {
   background-color: #3071C7;
   border:none;
   border-radius: 4px;
@@ -40,29 +40,29 @@ button{
   width: 200px;
 }
 
-button:hover{
+button:hover {
     background-color: #112745;
 }
 
-#close-button{
+#close-button {
   font-weight: bold;
   float: right;
   padding: 5px;
   width: 25px;
 }
 
-#randomizer-text{
+#randomizer-text {
   text-align: center;
 }
 
 
-#randomizer-div{
+#randomizer-div {
   background-color: #6E97CC;
   color: white;
   padding: 10px;
 }
 
-#NJ-person-container{
+#NJ-person-container {
   background-color: #78A4DE;
   display: none;
   margin: 10px;
@@ -70,12 +70,12 @@ button:hover{
   text-align: center;
 }
 
-#NJ-person-name{
+#NJ-person-name {
    font-size: 20px;
    font-weight: bold;
 }
 
-#NJ-person-descrip{
+#NJ-person-descrip {
   font-style: italic;
 }
 
