@@ -1,4 +1,10 @@
+body{
+  background-color: #abbed6;
+}
+
 #content {
+  background-color: #f8f8ff;
+  padding: 10px;
   margin-left: auto;
   margin-right: auto;
   width: 650px;
@@ -7,3 +13,15 @@
 #greeting-container {
   margin-top: 20px;
 }
+
+img{
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 300px;
+}
+
+h1, h2{
+  text-align: center;
+}
+
