@@ -13,16 +13,24 @@
 // limitations under the License.
 
 /**
- * Adds a random greeting to the page.
+ * Adds a random famous person from New Jersey to page.
  */
-function addRandomGreeting() {
-  const greetings =
-      ['Hello world!', '¡Hola Mundo!', '你好，世界！', 'Bonjour le monde!'];
+function addRandomNJPerson() {
+  const people =
+      ['Bruce Springsteen', 'Frank Sinatra', 'Meryl Streep', 'Whitney Houston', 'Queen Latifah'];
+  const descriptions = 
+      ['Boooooorn in the (best state in the) U.S.A.', 'Not sure why he never made a song about New Jersey, New Jersey',
+      'She is from the town adjacent to mine!', 'She Will Always Love New Jersey', 'Royalty!'];
 
-  // Pick a random greeting.
-  const greeting = greetings[Math.floor(Math.random() * greetings.length)];
+  // Pick a random number in order to pick a random person and their respective description.
+  const randomNum = Math.floor(Math.random() * people.length);
+  const person = people[randomNum];
+  const descrip = descriptions[randomNum];
 
   // Add it to the page.
-  const greetingContainer = document.getElementById('greeting-container');
-  greetingContainer.innerText = greeting;
+  const personNameContainer = document.getElementById('NJ-person-name');
+  const personDescripContainer = document.getElementById('NJ-person-descrip');
+  personNameContainer.innerText = person;
+  personDescripContainer.innerText = descrip;
+  
 }
