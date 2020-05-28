@@ -16,6 +16,10 @@
  * Adds a random famous person from New Jersey to page.
  */
 function addRandomNJPerson() {
+  //show container
+  const personContainer = document.getElementById("NJ-person-container");
+  personContainer.style.display = "block"
+
   const people =
       ['Bruce Springsteen', 'Frank Sinatra', 'Meryl Streep', 'Whitney Houston', 'Queen Latifah'];
   const descriptions = 
@@ -33,4 +37,9 @@ function addRandomNJPerson() {
   personNameContainer.innerText = person;
   personDescripContainer.innerText = descrip;
   
+}
+
+function closeRandomizer(){
+  const personContainer = document.getElementById("NJ-person-container");
+  personContainer.style.display = "none"
 }

@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <title>Isabel's Portfolio</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="/images/bitmoji-celebrate.png" type="image/png">
     <script src="script.js"></script>
   </head>
   <body>
@@ -23,29 +24,36 @@
          "all bagels taste the same" or that "there's no way that JERSEY of all places makes the best 
          bagels," but let me be the first to tell you that no, not all bagels are created equal and 
          that yes, New Jersey is home to the best bagels.</p>    
-      <img src="/images/bitmoj-mmm.JPG" alt="Bitmoji Mmmm Image">
+      <img src="/images/bitmoji-mmm.png" alt="Bitmoji Mmmm Image">
       <p>Don't believe me? You simply HAVE to come to New Jersey and try them.  It should be the 
-         number one location on your bucket list.   
-      <p>Click here for a random famous New Jerseyian:</p>
-      <button onclick="addRandomNJPerson()">NJ Rocks!</button>
-      <div id="NJ-person-container"><p id="NJ-person-name"><p id="NJ-person-descrip"></div>
+         number one location on your bucket list.</p>   
+
+      <div id="randomizer-div">   
+        <p id="randomizer-text">Click here for a random famous New Jerseyian:</p>
+        <button onclick="addRandomNJPerson()" id="randomizer-button">NJ Rocks!</button>
+        <div id="NJ-person-container">
+            <button onclick="closeRandomizer()" id="close-button">&times;</button>
+            <p id="NJ-person-name"></p>
+            <p id="NJ-person-descrip"><p></p>
+        </div>
+      </div>
 
       <h2>Beep Boop Bop</h2>
-      <img src="/images/bitmoji-hero.JPG" alt="Bitmoji Superhero Image">
+      <img src="/images/bitmoji-hero.png" alt="Bitmoji Superhero Image">
       <p>When I am not in NJ eating bagels every morning, you can find me at college at Washington University in St. Louis 
          (aka WashU).  There, I spend my days beep boop bopping and working toward my major of Computer Science and Math.  I am
          not 100% sure what I want to do after college but I know it will have something to do with computer science or coding or 
-         technology or saving the world... who knows?
+         technology or saving the world... who knows?</p>
       <p>I also have always really loved art.  I used to take art classes in middle and high school, and while I am DEFINITELY not
-          the next Picasso, I would love to minor in Design and continue exploring the field after college, even if it is just a hobby.
+          the next Picasso, I would love to minor in Design and continue exploring the field after college, even if it is just a hobby.</p>
 
       <h2>Contact Me</h2>
-      <img src="/images/bitmoji-work.JPG" alt="Bitmoji Work Image">
+      <img src="/images/bitmoji-work.png" alt="Bitmoji Work Image">
       <ul>
-        <li>Work email: isangimino@google.com
-        <li>Personal email: isabelsang18@gmail.com
-        <li><a href="https://github.com/isabelsang">My Github</a>
-        <li><a href="https://www.linkedin.com/in/isabel-sangimino-b56973190">My Linkedin</a>
+        <li>Work email: isangimino@google.com</li>
+        <li>Personal email: isabelsang18@gmail.com</li>
+        <li><a href="https://github.com/isabelsang">My Github</a></li>
+        <li><a href="https://www.linkedin.com/in/isabel-sangimino-b56973190">My Linkedin</a></li>
       </ul>
     </div>
   </body>
