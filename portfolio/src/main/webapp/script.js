@@ -36,10 +36,13 @@ function addRandomNJPerson() {
   const personDescripContainer = document.getElementById('NJ-person-descrip');
   personNameContainer.innerText = person;
   personDescripContainer.innerText = descrip;
-  
 }
 
 function closeRandomizer(){
   const personContainer = document.getElementById("NJ-person-container");
-  personContainer.style.display = "none"
+  personContainer.style.display = "none";
+}
+
+function makeLarger(pic){
+  console.log(pic);
 }

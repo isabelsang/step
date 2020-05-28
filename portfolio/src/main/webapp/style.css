@@ -79,4 +79,24 @@ button:hover {
   font-style: italic;
 }
 
+/*------------ gallery-------------*/
+#gallery-container {
+  background-color: #6E97CC;
+  color: white;
+  padding: 10px;
+}
+
+#gallery {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+#gallery img {
+  width: 200px;
+}
+
+#gallery img:hover {
+    border: thick solid black;
+}
 
