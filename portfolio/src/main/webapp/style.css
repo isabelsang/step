@@ -40,6 +40,17 @@ button{
   width: 200px;
 }
 
+button:hover{
+    background-color: #112745;
+}
+
+#close-button{
+  font-weight: bold;
+  float: right;
+  padding: 5px;
+  width: 25px;
+}
+
 #randomizer-text{
   text-align: center;
 }
@@ -53,6 +64,7 @@ button{
 
 #NJ-person-container{
   background-color: #78A4DE;
+  display: none;
   margin: 10px;
   padding: 5px;
   text-align: center;

@@ -30,8 +30,12 @@
 
       <div id="randomizer-div">   
         <p id="randomizer-text">Click here for a random famous New Jerseyian:</p>
-        <button onclick="addRandomNJPerson()">NJ Rocks!</button>
-        <div id="NJ-person-container"><p id="NJ-person-name"></p><p id="NJ-person-descrip"><p></p></div>
+        <button onclick="addRandomNJPerson()" id="randomizer-button">NJ Rocks!</button>
+        <div id="NJ-person-container">
+            <button onclick="closeRandomizer()" id="close-button">&times;</button>
+            <p id="NJ-person-name"></p>
+            <p id="NJ-person-descrip"><p></p>
+        </div>
       </div>
 
       <h2>Beep Boop Bop</h2>
