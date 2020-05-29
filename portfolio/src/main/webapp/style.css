@@ -93,7 +93,10 @@ button:hover {
 }
 
 #gallery img {
-  width: 200px;
+  height: 250px;
+  margin:10px;
+  object-fit: cover;
+  width: auto;
 }
 
 #gallery img:hover {
