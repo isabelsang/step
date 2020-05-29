@@ -121,3 +121,27 @@ button:hover {
   padding: 20px;
   width: 50%;
 }
+
+
+/*-------- contact section -------*/
+#contact-section {
+  text-align: center;
+}
+
+#contact-section ul {
+    list-style-type: none;
+}
+
+#contact-section a {
+  font-weight: bold;
+  text-decoration: none;
+}
+
+#contact-section a:visited {
+  color: black;
+}
+
+#contact-section a:hover {
+  color: #3071C7;
+  font-weight: bold;
+}
