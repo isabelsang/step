@@ -44,7 +44,7 @@ button:hover {
     background-color: #112745;
 }
 
-#close-button {
+.close-button {
   font-weight: bold;
   float: right;
   padding: 5px;
@@ -82,8 +82,8 @@ button:hover {
 /*------------ gallery-------------*/
 #gallery-container {
   background-color: #6E97CC;
-  color: white;
   padding: 10px;
+  text-align: center;
 }
 
 #gallery {
@@ -100,3 +100,21 @@ button:hover {
     border: thick solid black;
 }
 
+#popup {
+    background-color: rgba(0,0,0,0.2);
+    display: none;
+    height: 100%;
+    left: 0;
+    padding-top: 100px;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 1; 
+}
+
+#popup-content {
+  background-color: white;
+  margin: auto;
+  padding: 20px;
+  width: 50%;
+}

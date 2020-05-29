@@ -32,7 +32,7 @@
         <p id="randomizer-text">Click here for a random famous New Jerseyian:</p>
         <button onclick="addRandomNJPerson()" id="randomizer-button">NJ Rocks!</button>
         <div id="NJ-person-container">
-            <button onclick="closeRandomizer()" id="close-button">&times;</button>
+            <button onclick="closeWindow('random')" class="close-button">&times;</button>
             <p id="NJ-person-name"></p>
             <p id="NJ-person-descrip"><p></p>
         </div>
@@ -53,7 +53,13 @@
             <img src="/images/bitmoji-work.png" alt="2" onclick="makeLarger(this)"/>
             <img src="/images/bitmoji-work.png" alt="3" onclick="makeLarger(this)"/>
         </div>
-       
+        <div id="popup">
+            <div id="popup-content">
+              <button onclick="closeWindow('popup')" class="close-button">&times;</button>
+              <img id="popup-photo" src="" alt="">
+              <p id="popup-descrip"></p>
+            </div>
+        </div>
       </div>
 
       <h2>Contact Me</h2>
