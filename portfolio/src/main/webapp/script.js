@@ -36,10 +36,32 @@ function addRandomNJPerson() {
   const personDescripContainer = document.getElementById('NJ-person-descrip');
   personNameContainer.innerText = person;
   personDescripContainer.innerText = descrip;
-  
 }
 
-function closeRandomizer(){
-  const personContainer = document.getElementById("NJ-person-container");
-  personContainer.style.display = "none"
+/**
+ * Closes the randomizer or the popup
+ */
+function closeWindow(window){
+  if (window == 'random'){
+    document.getElementById("NJ-person-container").style.display = "none";
+  } else if (window == 'popup'){
+    document.getElementById("popup").style.display = "none";
+  }
+}
+
+/**
+ * Makes image larger and displays in popup.
+ */
+function makeLarger(pic){
+  /* display popup */
+  document.getElementById("popup").style.display = "block";
+
+  /* display photo */
+  const popupPhoto = document.getElementById("popup-photo");
+  popupPhoto.src = pic.src;
+  popupPhoto.alt = pic.alt;
+
+  /* display descrip */
+  const popupDescrip = document.getElementById("popup-descrip");
+  popupDescrip.innerHTML = pic.alt;
 }

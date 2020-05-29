@@ -32,7 +32,7 @@
         <p id="randomizer-text">Click here for a random famous New Jerseyian:</p>
         <button onclick="addRandomNJPerson()" id="randomizer-button">NJ Rocks!</button>
         <div id="NJ-person-container">
-            <button onclick="closeRandomizer()" id="close-button">&times;</button>
+            <button onclick="closeWindow('random')" class="close-button">&times;</button>
             <p id="NJ-person-name"></p>
             <p id="NJ-person-descrip"><p></p>
         </div>
@@ -46,6 +46,23 @@
          technology or saving the world... who knows?</p>
       <p>I also have always really loved art.  I used to take art classes in middle and high school, and while I am DEFINITELY not
           the next Picasso, I would love to minor in Design and continue exploring the field after college, even if it is just a hobby.</p>
+      <div id="gallery-container">
+        <p>Click on a photo to learn more about me!</p>
+        <div id="gallery">
+            <img src="/images/tedx.jpg" alt="I have been involved with TEDx since high school and am currently the co-president at WashU!" onclick="makeLarger(this)"/>
+            <img src="/images/flower.jpg" alt="I have a newfound appreciation for flowers after being stuck in quarantine for so long!" onclick="makeLarger(this)"/>
+            <img src="/images/arch.JPG" alt="Even though St. Louis is a lot smaller than NYC, I actually love how lowkey and chill it is." onclick="makeLarger(this)"/>
+            <img src="/images/camera.PNG" alt="Another one of my hobbies is video productions (filming and editting videos for fun)" onclick="makeLarger(this)"/>
+            <img src="/images/fall.jpg" alt="My favorite part of the year is when the leaves start to change in the fall!!" onclick="makeLarger(this)"/>
+        </div>
+        <div id="popup">
+            <div id="popup-content">
+              <button onclick="closeWindow('popup')" class="close-button">&times;</button>
+              <img id="popup-photo" src="" alt="">
+              <p id="popup-descrip"></p>
+            </div>
+        </div>
+      </div>
 
       <h2>Contact Me</h2>
       <img src="/images/bitmoji-work.png" alt="Bitmoji Work Image">
