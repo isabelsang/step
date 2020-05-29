@@ -41,12 +41,8 @@ function addRandomNJPerson() {
 /**
  * Closes the randomizer or the popup
  */
-function closeWindow(window){
-  if (window == 'random'){
-    document.getElementById("NJ-person-container").style.display = "none";
-  } else if (window == 'popup'){
-    document.getElementById("popup").style.display = "none";
-  }
+function closeWindow(elementID){
+  document.getElementById(elementID).style.display = "none";
 }
 
 /**
