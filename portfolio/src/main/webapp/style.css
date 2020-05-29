@@ -133,8 +133,8 @@ button:hover {
 }
 
 #contact-section a {
-  text-decoration: none;
   font-weight: bold;
+  text-decoration: none;
 }
 
 #contact-section a:visited {
