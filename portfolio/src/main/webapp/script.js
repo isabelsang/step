@@ -62,8 +62,25 @@ function makeLarger(pic){
   popupDescrip.innerHTML = pic.alt;
 }
 
+/**
+ * fetches data from data servlet
+ */
 function getFromDataServlet(){
-    fetch('/data').then(response => response.text()).then((message) => {
-    document.getElementById('message-container').innerHTML = message;
+    fetch('/data').then(response => response.json()).then((comments) => {
+    //document.getElementById('message-container').innerHTML = message;
+    const commentsContainer = document.getElementById('comments-container');
+    console.log(comments);
+    for (i = 0; i<comments.length; i++){
+         commentsContainer.appendChild(createComment(comments[i]));
+    }
+       
   });
+}
+
+/** Creates a <p> element with class .comment containg text passed as parameter */
+function createComment(text){
+    const commentElement = document.createElement('p');
+    commentElement.innerText = text;
+    commentElement.classList.add('comment');
+    return commentElement;
 }
