@@ -67,7 +67,6 @@ function makeLarger(pic){
  */
 function getFromDataServlet(){
     fetch('/data').then(response => response.json()).then((comments) => {
-    //document.getElementById('message-container').innerHTML = message;
     const commentsContainer = document.getElementById('comments-container');
     console.log(comments);
     for (i = 0; i<comments.length; i++){
