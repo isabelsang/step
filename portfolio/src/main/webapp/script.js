@@ -61,3 +61,9 @@ function makeLarger(pic){
   const popupDescrip = document.getElementById("popup-descrip");
   popupDescrip.innerHTML = pic.alt;
 }
+
+function getFromDataServlet(){
+    fetch('/data').then(response => response.text()).then((message) => {
+    document.getElementById('message-container').innerHTML = message;
+  });
+}
