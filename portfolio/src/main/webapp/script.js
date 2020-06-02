@@ -17,8 +17,8 @@
  */
 function addRandomNJPerson() {
   //show container
-  const personContainer = document.getElementById("NJ-person-container");
-  personContainer.style.display = "block"
+  const personContainer = document.getElementById('NJ-person-container');
+  personContainer.style.display = 'block';
 
   const people =
       ['Bruce Springsteen', 'Frank Sinatra', 'Meryl Streep', 'Whitney Houston', 'Queen Latifah'];
@@ -42,7 +42,7 @@ function addRandomNJPerson() {
  * Closes the randomizer or the popup
  */
 function closeWindow(elementID){
-  document.getElementById(elementID).style.display = "none";
+  document.getElementById(elementID).style.display = 'none';
 }
 
 /**
@@ -50,15 +50,15 @@ function closeWindow(elementID){
  */
 function makeLarger(pic){
   /* display popup */
-  document.getElementById("popup").style.display = "block";
+  document.getElementById('popup').style.display = 'block';
 
   /* display photo */
-  const popupPhoto = document.getElementById("popup-photo");
+  const popupPhoto = document.getElementById('popup-photo');
   popupPhoto.src = pic.src;
   popupPhoto.alt = pic.alt;
 
   /* display descrip */
-  const popupDescrip = document.getElementById("popup-descrip");
+  const popupDescrip = document.getElementById('popup-descrip');
   popupDescrip.innerHTML = pic.alt;
 }
 
