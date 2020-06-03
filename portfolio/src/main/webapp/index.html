@@ -7,7 +7,7 @@
     <link rel="icon" href="/images/bitmoji-celebrate.png" type="image/png">
     <script src="script.js"></script>
   </head>
-  <body>
+  <body onload="getComments()">
     <div id="content">
       <h1>Isabel's Portfolio</h1>
       <p>Hi! My name is Isabel and I am excited to be a STEP intern at Google this summer.
@@ -76,8 +76,12 @@
       </div>
 
       <div id="comment-section">
-           <button onclick="getFromDataServlet()">Fetch!</button>
-           <div id="comments-container"></div>
+        <h2>Comments</h2>
+        <form action="/data" method="POST">
+            <textarea name="message" id="comment-textarea" placeholder="Enter your comment here"></textarea>
+            <input type="submit" id="comment-submit"/>
+        </form>
+        <div id="comments-container"></div>
       </div>
     </div>
   </body>
