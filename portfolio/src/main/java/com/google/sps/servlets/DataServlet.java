@@ -47,8 +47,8 @@ public class DataServlet extends HttpServlet {
     commentEntity.setProperty("message", message);
 
     DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
-
-    if(!message.equals("")){
+    
+    if(message!=null && !message.equals("")){
         datastore.put(commentEntity);
     }
     response.sendRedirect("/index.html");
