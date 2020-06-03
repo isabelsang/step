@@ -148,7 +148,8 @@ button:hover, #comment-submit:hover {
 
 /*-------- comment section -------*/
 #comment-section {
-  background-color: #97A8BD;
+  background-color: #6E97CC;
+  color: white;
   padding: 10px;
 }
 
@@ -165,7 +166,7 @@ button:hover, #comment-submit:hover {
 }
 
 .comment {
-  border: 1px black solid;
+  background-color: #78A4DE;
   padding: 10px;
 }
 
