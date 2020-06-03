@@ -17,6 +17,9 @@ package com.google.sps.servlets;
 import com.google.appengine.api.datastore.DatastoreService;
 import com.google.appengine.api.datastore.DatastoreServiceFactory;
 import com.google.appengine.api.datastore.Entity;
+import com.google.appengine.api.datastore.PreparedQuery;
+import com.google.appengine.api.datastore.Query;
+import com.google.appengine.api.datastore.Query.SortDirection;
 import java.util.*;
 import java.io.IOException;
 import com.google.gson.Gson;
@@ -29,10 +32,18 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet("/data")
 public class DataServlet extends HttpServlet {
  
-  private ArrayList<String> comments = new ArrayList<String>();
+  private DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
  
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    Query query = new Query("Comment");
+    PreparedQuery results = datastore.prepare(query);
+    
+    ArrayList<String> comments = new ArrayList<String>();
+    for(Entity entity : results.asIterable()){
+        comments.add((String) entity.getProperty("message"));
+    }
+    
     Gson gson = new Gson();
     String json = gson.toJson(comments);
     response.setContentType("application/json;");
@@ -45,8 +56,6 @@ public class DataServlet extends HttpServlet {
 
     Entity commentEntity = new Entity("Comment");
     commentEntity.setProperty("message", message);
-
-    DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
 
     if(!message.equals("")){
         datastore.put(commentEntity);
