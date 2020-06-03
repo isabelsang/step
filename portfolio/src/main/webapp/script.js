@@ -63,13 +63,12 @@ function makeLarger(pic){
 }
 
 /**
- * fetches data from data servlet
+ * fetches comments from data servlet
  */
-function getFromDataServlet(){
+function getComments(){
     fetch('/data').then(response => response.json()).then((comments) => {
     const commentsContainer = document.getElementById('comments-container');
-    console.log(comments);
-    for (i = 0; i<comments.length; i++){
+    for (i = 0; i < comments.length; i++){
          commentsContainer.appendChild(createComment(comments[i]));
     }
        
