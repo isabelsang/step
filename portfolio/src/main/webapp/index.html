@@ -78,9 +78,17 @@
       <div id="comment-section">
         <h2>Comments</h2>
         <form action="/data" method="POST">
-            <textarea name="message" id="comment-textarea" placeholder="Enter your comment here"></textarea>
-            <input type="submit" id="comment-submit"/>
+          <textarea name="message" id="comment-textarea" placeholder="Enter your comment here"></textarea>
+          <input type="submit" id="comment-submit"/>
         </form>
+        <div id="comment-limit-section">
+          <p id="limit-descrip">Number of comments to display:</p>
+          <select id="comment-limit-select" onchange="getComments()">
+            <option value="5">5
+            <option value="10">10
+            <option value="15">15  
+          </select>
+        </div>
         <div id="comments-container"></div>
       </div>
     </div>

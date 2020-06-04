@@ -41,7 +41,7 @@ button, #comment-submit {
 }
 
 button:hover, #comment-submit:hover {
-    background-color: #112745;
+  background-color: #112745;
 }
 
 .close-button {
@@ -100,19 +100,19 @@ button:hover, #comment-submit:hover {
 }
 
 #gallery img:hover {
-    border: thick solid black;
+  border: thick solid black;
 }
 
 #popup {
-    background-color: rgba(0,0,0,0.2);
-    display: none;
-    height: 100%;
-    left: 0;
-    padding-top: 100px;
-    position: fixed;
-    width: 100%;
-    top: 0;
-    z-index: 1; 
+  background-color: rgba(0,0,0,0.2);
+  display: none;
+  height: 100%;
+  left: 0;
+  padding-top: 100px;
+  position: fixed;
+  width: 100%;
+  top: 0;
+  z-index: 1; 
 }
 
 #popup-content {
@@ -129,7 +129,7 @@ button:hover, #comment-submit:hover {
 }
 
 #contact-section ul {
-    list-style-type: none;
+  list-style-type: none;
 }
 
 #contact-section a {
@@ -168,5 +168,21 @@ button:hover, #comment-submit:hover {
 .comment {
   background-color: #78A4DE;
   padding: 10px;
+}
+
+#comment-limit-section {
+  display: block;
+  margin: auto;
+  width: 300px;
+}
+
+#limit-descrip {
+  display: inline-block;
+  font-style: italic;
+}
+
+#comment-limit-select {
+  margin-left: 15px;
+  width: 40px;
 }
 

@@ -66,8 +66,13 @@ function makeLarger(pic){
  * fetches comments from data servlet
  */
 function getComments(){
-    fetch('/data').then(response => response.json()).then((comments) => {
     const commentsContainer = document.getElementById('comments-container');
+    commentsContainer.innerHTML = "";
+
+    var commentLimit = getCommentLimit();
+    var fetchURL = '/data?comment-limit='+commentLimit;
+
+    fetch(fetchURL).then(response => response.json()).then((comments) => {
     for (i = 0; i < comments.length; i++){
          commentsContainer.appendChild(createComment(comments[i]));
     }  
@@ -80,4 +85,10 @@ function createComment(text){
     commentElement.innerText = text;
     commentElement.classList.add('comment');
     return commentElement;
+}
+
+/** gets user-inputted comment limit  */
+function getCommentLimit(){
+    var limit = document.getElementById("comment-limit-select").value;
+    return limit;
 }

@@ -14,6 +14,7 @@
 
 package com.google.sps.servlets;
 
+import com.google.appengine.api.datastore.FetchOptions;
 import com.google.appengine.api.datastore.DatastoreService;
 import com.google.appengine.api.datastore.DatastoreServiceFactory;
 import com.google.appengine.api.datastore.Entity;
@@ -36,14 +37,15 @@ public class DataServlet extends HttpServlet {
  
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-    Query query = new Query("Comment").addSort("timestamp", SortDirection.ASCENDING);
+    Query query = new Query("Comment").addSort("timestamp", SortDirection.DESCENDING);
     PreparedQuery results = datastore.prepare(query);
     
+    int commentLimit = getCommentLimit(request);
     List<String> comments = new ArrayList<String>();
-    for(Entity entity : results.asIterable()){
+    for(Entity entity : results.asIterable(FetchOptions.Builder.withLimit(commentLimit))){
         comments.add((String) entity.getProperty("message"));
     }
-    
+
     Gson gson = new Gson();
     String json = gson.toJson(comments);
     response.setContentType("application/json;");
@@ -66,4 +68,19 @@ public class DataServlet extends HttpServlet {
     }
     response.sendRedirect("/index.html");
   }
+
+  /** Returns the comment limit entered by the user, or 5 as default */
+  private int getCommentLimit(HttpServletRequest request){
+     String commentLimitStr = request.getParameter("comment-limit");
+
+      int commentLimit = 5;
+      //try {
+          commentLimit = Integer.parseInt(commentLimitStr);
+      //} catch (NumberFormatException e) {
+      //    System.err.println("Could not conver to int: ");
+          //FINISHHHHHHHHHHHHHHH
+     // }
+      return commentLimit;
+  }
+ 
 }
