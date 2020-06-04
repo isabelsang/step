@@ -70,8 +70,7 @@ function getComments(){
     const commentsContainer = document.getElementById('comments-container');
     for (i = 0; i < comments.length; i++){
          commentsContainer.appendChild(createComment(comments[i]));
-    }
-       
+    }  
   });
 }
 
