@@ -39,7 +39,7 @@ public class DataServlet extends HttpServlet {
     Query query = new Query("Comment").addSort("timestamp", SortDirection.ASCENDING);
     PreparedQuery results = datastore.prepare(query);
     
-    ArrayList<String> comments = new ArrayList<String>();
+    List<String> comments = new ArrayList<String>();
     for(Entity entity : results.asIterable()){
         comments.add((String) entity.getProperty("message"));
     }

@@ -66,14 +66,11 @@ function makeLarger(pic){
  * fetches comments from data servlet
  */
 function getComments(){
-    console.log("enter");
     fetch('/data').then(response => response.json()).then((comments) => {
     const commentsContainer = document.getElementById('comments-container');
     for (i = 0; i < comments.length; i++){
          commentsContainer.appendChild(createComment(comments[i]));
-    }
-    console.log(commentsContainer);
-       
+    }  
   });
 }
 
