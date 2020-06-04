@@ -29,7 +29,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-/** Servlet that returns some example content. TODO: modify this file to handle comments data */
+/** Servlet that returns comments from datastore*/
 @WebServlet("/data")
 public class DataServlet extends HttpServlet {
  
@@ -43,7 +43,7 @@ public class DataServlet extends HttpServlet {
     int commentLimit = getCommentLimit(request);
     List<String> comments = new ArrayList<String>();
     for(Entity entity : results.asIterable(FetchOptions.Builder.withLimit(commentLimit))){
-        comments.add((String) entity.getProperty("message"));
+      comments.add((String) entity.getProperty("message"));
     }
 
     Gson gson = new Gson();
@@ -64,23 +64,19 @@ public class DataServlet extends HttpServlet {
     DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
     
     if(message!=null && !message.equals("")){
-        datastore.put(commentEntity);
+      datastore.put(commentEntity);
     }
     response.sendRedirect("/index.html");
   }
 
   /** Returns the comment limit entered by the user, or 5 as default */
   private int getCommentLimit(HttpServletRequest request){
-     String commentLimitStr = request.getParameter("comment-limit");
+    String commentLimitStr = request.getParameter("comment-limit");
 
-      int commentLimit = 5;
-      //try {
-          commentLimit = Integer.parseInt(commentLimitStr);
-      //} catch (NumberFormatException e) {
-      //    System.err.println("Could not conver to int: ");
-          //FINISHHHHHHHHHHHHHHH
-     // }
-      return commentLimit;
+    int commentLimit = 5; //default
+    commentLimit = Integer.parseInt(commentLimitStr);
+    return commentLimit;
   }
  
 }
+
