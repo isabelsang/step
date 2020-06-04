@@ -67,10 +67,10 @@ function makeLarger(pic){
  */
 function getComments(){
     const commentsContainer = document.getElementById('comments-container');
-    commentsContainer.innerHTML = "";
+    commentsContainer.innerHTML = '';
 
-    var commentLimit = getCommentLimit();
-    var fetchURL = '/data?comment-limit='+commentLimit;
+    const commentLimit = getCommentLimit();
+    const fetchURL = '/data?comment-limit=' + commentLimit;
 
     fetch(fetchURL).then(response => response.json()).then((comments) => {
     for (i = 0; i < comments.length; i++){
@@ -89,6 +89,6 @@ function createComment(text){
 
 /** gets user-inputted comment limit  */
 function getCommentLimit(){
-    var limit = document.getElementById("comment-limit-select").value;
+    const limit = document.getElementById('comment-limit-select').value;
     return limit;
 }
