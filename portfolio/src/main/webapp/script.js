@@ -103,9 +103,15 @@ function createComment(comment){
       commentElement.remove();
     });
 
+    const moodElement = document.createElement('img');
+    moodElement.src = '/images/moods/' + comment.mood + '.png';
+    moodElement.alt = comment.mood;
+    moodElement.classList.add('comment-mood');
+
     commentElement.appendChild(nameElement);
     commentElement.appendChild(deleteBtnElement);
     commentElement.appendChild(messageElement);
+    commentElement.appendChild(moodElement);
 
     return commentElement;
 }
