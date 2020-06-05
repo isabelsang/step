@@ -146,13 +146,14 @@ button:hover, #comment-submit:hover {
   font-weight: bold;
 }
 
-/*-------- comment section -------*/
+/*----------------------- comment section -------------------------*/
 #comment-section {
   background-color: #6E97CC;
   color: white;
   padding: 10px;
 }
 
+/*------- comment input ---------*/
 #comment-textarea, #name-input {
     display: block;
     margin: auto;
@@ -171,6 +172,7 @@ button:hover, #comment-submit:hover {
   width: 100px;
 }
 
+/*------- comment limit ---------*/
 #comment-limit-section {
   display: block;
   margin: auto;
@@ -187,6 +189,7 @@ button:hover, #comment-submit:hover {
   width: 40px;
 }
 
+/*------- comment styling ---------*/
 .comment {
   background-color: #78A4DE;
   margin: 10px;
@@ -207,4 +210,11 @@ button:hover, #comment-submit:hover {
   float: right;
   padding: 5px;
   width: 100px;
+}
+
+/*------- comment mood ---------*/
+#comment-mood-select {
+  display: block;
+  margin: auto;
+  margin-top: 10px;
 }
