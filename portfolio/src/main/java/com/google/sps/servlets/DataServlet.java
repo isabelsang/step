@@ -23,6 +23,7 @@ import com.google.appengine.api.datastore.Query;
 import com.google.appengine.api.datastore.Query.SortDirection;
 import java.util.*;
 import java.io.IOException;
+import com.google.sps.data.Comment;
 import com.google.gson.Gson;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -41,9 +42,14 @@ public class DataServlet extends HttpServlet {
     PreparedQuery results = datastore.prepare(query);
     
     int commentLimit = getCommentLimit(request);
-    List<String> comments = new ArrayList<String>();
+    List<Comment> comments = new ArrayList<Comment>();
     for(Entity entity : results.asIterable(FetchOptions.Builder.withLimit(commentLimit))){
-      comments.add((String) entity.getProperty("message"));
+      long id = entity.getKey().getId();
+      String message = (String) entity.getProperty("message");
+      long timestamp = (long) entity.getProperty("timestamp");
+
+      Comment comment = new Comment(id, message, timestamp);
+      comments.add(comment);
     }
 
     Gson gson = new Gson();

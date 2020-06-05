@@ -80,10 +80,27 @@ function getComments(){
 }
 
 /** Creates a <p> element with class .comment containg text passed as parameter */
-function createComment(text){
-    const commentElement = document.createElement('p');
-    commentElement.innerText = text;
+function createComment(comment){
+    //container div
+    const commentElement = document.createElement('div');
     commentElement.classList.add('comment');
+
+    const messageElement = document.createElement('p');
+    messageElement.innerText = comment.message;
+    messageElement.classList.add('comment-message');
+
+    const deleteBtnElement = document.createElement('button');
+    deleteBtnElement.innerText = 'Delete';
+    deleteBtnElement.classList.add('delete-comment-btn');
+    deleteBtnElement.addEventListener('click', () => {
+      deleteComment(comment);
+
+      //remove from DOM 
+      commentElement.remove();
+    });
+
+    commentElement.appendChild(messageElement);
+    commentElement.appendChild(deleteBtnElement);
     return commentElement;
 }
 
@@ -91,4 +108,11 @@ function createComment(text){
 function getCommentLimit(){
     const limit = document.getElementById('comment-limit-select').value;
     return limit;
+}
+
+/** passes server id of comment to delete  */
+function deleteComment(comment){
+    const params = new URLSearchParams();
+    params.append('id', comment.id);
+    fetch('/delete-data', {method: postMessage, body: params});
 }
