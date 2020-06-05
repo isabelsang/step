@@ -167,6 +167,8 @@ button:hover, #comment-submit:hover {
 
 .comment {
   background-color: #78A4DE;
+  height: 30px;
+  margin: 10px;
   padding: 10px;
 }
 
@@ -186,3 +188,12 @@ button:hover, #comment-submit:hover {
   width: 40px;
 }
 
+.delete-comment-btn {
+  float: right;
+  padding: 5px;
+  width: 100px;
+}
+
+.comment-message {
+  display: inline;
+}
