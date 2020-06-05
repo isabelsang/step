@@ -194,6 +194,7 @@ button:hover, #comment-submit:hover {
   background-color: #78A4DE;
   margin: 10px;
   padding: 10px;
+  position: relative;
   word-wrap: break-word;
 }
 
@@ -217,4 +218,11 @@ button:hover, #comment-submit:hover {
   display: block;
   margin: auto;
   margin-top: 10px;
+}
+
+.comment-mood {
+  left: 0px;
+  position: absolute;
+  top: 0px;
+  width: 75px;
 }
