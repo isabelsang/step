@@ -23,7 +23,7 @@ public final class Comment {
   private final long timestamp;
   private final String mood;
 
-  public Comment(long id, String name, String message, long timestamp) {
+  public Comment(long id, String name, String message, long timestamp, String mood) {
     this.id = id;
     this.name = name;
     this.message = message;
