@@ -85,6 +85,10 @@ function createComment(comment){
     const commentElement = document.createElement('div');
     commentElement.classList.add('comment');
 
+    const nameElement = document.createElement('p');
+    nameElement.innerText = comment.name;
+    nameElement.classList.add('comment-name');
+
     const messageElement = document.createElement('p');
     messageElement.innerText = comment.message;
     messageElement.classList.add('comment-message');
@@ -99,8 +103,10 @@ function createComment(comment){
       commentElement.remove();
     });
 
-    commentElement.appendChild(messageElement);
+    commentElement.appendChild(nameElement);
     commentElement.appendChild(deleteBtnElement);
+    commentElement.appendChild(messageElement);
+
     return commentElement;
 }
 
