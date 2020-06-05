@@ -197,6 +197,9 @@ button:hover, #comment-submit:hover {
   position: relative;
   word-wrap: break-word;
 }
+.comment-text {
+  display: inline-block;
+}
 
 .comment-name {
   display: inline-block;
@@ -221,8 +224,7 @@ button:hover, #comment-submit:hover {
 }
 
 .comment-mood {
-  left: 0px;
-  position: absolute;
-  top: 0px;
+  display: inline-block;
+  margin-right: 20px;
   width: 75px;
 }

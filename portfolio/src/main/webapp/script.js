@@ -85,6 +85,9 @@ function createComment(comment){
     const commentElement = document.createElement('div');
     commentElement.classList.add('comment');
 
+    const textDivElement = document.createElement('div');
+    textDivElement.classList.add('comment-text');
+
     const nameElement = document.createElement('p');
     nameElement.innerText = comment.name;
     nameElement.classList.add('comment-name');
@@ -108,10 +111,13 @@ function createComment(comment){
     moodElement.alt = comment.mood;
     moodElement.classList.add('comment-mood');
 
-    commentElement.appendChild(nameElement);
-    commentElement.appendChild(deleteBtnElement);
-    commentElement.appendChild(messageElement);
+    textDivElement.appendChild(nameElement);
+    textDivElement.appendChild(messageElement);
+
     commentElement.appendChild(moodElement);
+    commentElement.appendChild(textDivElement);
+    commentElement.appendChild(deleteBtnElement);
+    
 
     return commentElement;
 }
