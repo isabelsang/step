@@ -64,11 +64,13 @@ public class DataServlet extends HttpServlet {
     String name = request.getParameter("name");
     String message = request.getParameter("message");
     long timestamp = System.currentTimeMillis();
+    String mood = request.getParameter("mood");
 
     Entity commentEntity = new Entity("Comment");
     commentEntity.setProperty("name", name);
     commentEntity.setProperty("message", message);
     commentEntity.setProperty("timestamp", timestamp);
+    commentEntity.setProperty("mood", mood);
 
     DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
     
