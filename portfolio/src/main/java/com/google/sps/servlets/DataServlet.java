@@ -48,8 +48,9 @@ public class DataServlet extends HttpServlet {
       String name = (String) entity.getProperty("name");
       String message = (String) entity.getProperty("message");
       long timestamp = (long) entity.getProperty("timestamp");
+      String mood = (String) entity.getProperty("mood");
 
-      Comment comment = new Comment(id, name, message, timestamp);
+      Comment comment = new Comment(id, name, message, timestamp, mood);
       comments.add(comment);
     }
 
@@ -64,15 +65,17 @@ public class DataServlet extends HttpServlet {
     String name = request.getParameter("name");
     String message = request.getParameter("message");
     long timestamp = System.currentTimeMillis();
+    String mood = request.getParameter("mood");
 
     Entity commentEntity = new Entity("Comment");
     commentEntity.setProperty("name", name);
     commentEntity.setProperty("message", message);
     commentEntity.setProperty("timestamp", timestamp);
+    commentEntity.setProperty("mood", mood);
 
     DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
     
-    if((message!=null && !message.equals("")) && (name!=null && !name.equals(""))){
+    if(!("").equals(message) && !("").equals(name)){
       datastore.put(commentEntity);
     }
     response.sendRedirect("/index.html");

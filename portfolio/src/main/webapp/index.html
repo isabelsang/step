@@ -80,6 +80,18 @@
         <form action="/data" method="POST">
           <input name="name" id="name-input" type="text" placeholder="Enter your name here">
           <textarea name="message" id="comment-textarea" placeholder="Enter your comment here"></textarea>
+          <select name="mood" id="comment-mood-select">
+            <option value="angry">angry
+            <option value="content">content
+            <option value="curious">curious
+            <option value="distraught">distraught
+            <option value="embarrassed">embarrassed
+            <option value="happy">happy
+            <option value="inlove">in love
+            <option value="sad">sad
+            <option value="surprised">surprised
+            <option value="tired">tired
+          </select>
           <input type="submit" id="comment-submit"/>
         </form>
         <div id="comment-limit-section">

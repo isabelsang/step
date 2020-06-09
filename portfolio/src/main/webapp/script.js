@@ -16,7 +16,7 @@
  * Adds a random famous person from New Jersey to page.
  */
 function addRandomNJPerson() {
-  //show container
+  //Show container
   const personContainer = document.getElementById('NJ-person-container');
   personContainer.style.display = 'block';
 
@@ -49,21 +49,21 @@ function closeWindow(elementID){
  * Makes image larger and displays in popup.
  */
 function makeLarger(pic){
-  /* display popup */
+  /* Display popup */
   document.getElementById('popup').style.display = 'block';
 
-  /* display photo */
+  /* Display photo */
   const popupPhoto = document.getElementById('popup-photo');
   popupPhoto.src = pic.src;
   popupPhoto.alt = pic.alt;
 
-  /* display descrip */
+  /* Display descrip */
   const popupDescrip = document.getElementById('popup-descrip');
   popupDescrip.innerHTML = pic.alt;
 }
 
 /**
- * fetches comments from data servlet
+ * Fetches comments from data servlet
  */
 function getComments(){
     const commentsContainer = document.getElementById('comments-container');
@@ -81,9 +81,12 @@ function getComments(){
 
 /** Creates a <p> element with class .comment containg text passed as parameter */
 function createComment(comment){
-    //container div
+    // Container div
     const commentElement = document.createElement('div');
     commentElement.classList.add('comment');
+
+    const textDivElement = document.createElement('div');
+    textDivElement.classList.add('comment-text');
 
     const nameElement = document.createElement('p');
     nameElement.innerText = comment.name;
@@ -99,24 +102,33 @@ function createComment(comment){
     deleteBtnElement.addEventListener('click', () => {
       deleteComment(comment);
 
-      //remove from DOM 
+      //Remove from DOM 
       commentElement.remove();
     });
 
-    commentElement.appendChild(nameElement);
+    const moodElement = document.createElement('img');
+    moodElement.src = '/images/moods/' + comment.mood + '.png';
+    moodElement.alt = comment.mood;
+    moodElement.classList.add('comment-mood');
+
+    textDivElement.appendChild(nameElement);
+    textDivElement.appendChild(messageElement);
+
+    commentElement.appendChild(moodElement);
+    commentElement.appendChild(textDivElement);
     commentElement.appendChild(deleteBtnElement);
-    commentElement.appendChild(messageElement);
+    
 
     return commentElement;
 }
 
-/** gets user-inputted comment limit  */
+/** Gets user-inputted comment limit  */
 function getCommentLimit(){
     const limit = document.getElementById('comment-limit-select').value;
     return limit;
 }
 
-/** passes server id of comment to delete  */
+/** Passes server id of comment to delete  */
 function deleteComment(comment){
     const params = new URLSearchParams();
     params.append('id', comment.id);
