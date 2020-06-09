@@ -16,7 +16,7 @@
  * Adds a random famous person from New Jersey to page.
  */
 function addRandomNJPerson() {
-  //show container
+  //Show container
   const personContainer = document.getElementById('NJ-person-container');
   personContainer.style.display = 'block';
 
@@ -49,21 +49,21 @@ function closeWindow(elementID){
  * Makes image larger and displays in popup.
  */
 function makeLarger(pic){
-  /* display popup */
+  /* Display popup */
   document.getElementById('popup').style.display = 'block';
 
-  /* display photo */
+  /* Display photo */
   const popupPhoto = document.getElementById('popup-photo');
   popupPhoto.src = pic.src;
   popupPhoto.alt = pic.alt;
 
-  /* display descrip */
+  /* Display descrip */
   const popupDescrip = document.getElementById('popup-descrip');
   popupDescrip.innerHTML = pic.alt;
 }
 
 /**
- * fetches comments from data servlet
+ * Fetches comments from data servlet
  */
 function getComments(){
     checkLoginStatus();
@@ -82,7 +82,7 @@ function getComments(){
 
 /** Creates a <p> element with class .comment containg text passed as parameter */
 function createComment(comment){
-    //container div
+    // Container div
     const commentElement = document.createElement('div');
     commentElement.classList.add('comment');
 
@@ -103,7 +103,7 @@ function createComment(comment){
     deleteBtnElement.addEventListener('click', () => {
       deleteComment(comment);
 
-      //remove from DOM 
+      //Remove from DOM 
       commentElement.remove();
     });
 
@@ -123,13 +123,13 @@ function createComment(comment){
     return commentElement;
 }
 
-/** gets user-inputted comment limit  */
+/** Gets user-inputted comment limit  */
 function getCommentLimit(){
     const limit = document.getElementById('comment-limit-select').value;
     return limit;
 }
 
-/** passes server id of comment to delete  */
+/** Passes server id of comment to delete  */
 function deleteComment(comment){
     const params = new URLSearchParams();
     params.append('id', comment.id);
