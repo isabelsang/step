@@ -197,6 +197,7 @@ button:hover, #comment-submit:hover {
   position: relative;
   word-wrap: break-word;
 }
+
 .comment-text {
   display: inline-block;
 }
