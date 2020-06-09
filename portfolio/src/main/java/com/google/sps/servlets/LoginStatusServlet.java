@@ -14,6 +14,10 @@
 
 package com.google.sps.servlets;
 
+import java.util.HashMap;
+import java.util.Map;
+import com.google.gson.Gson;
+
 import com.google.appengine.api.users.UserService;
 import com.google.appengine.api.users.UserServiceFactory;
 import java.io.IOException;
@@ -27,13 +31,27 @@ public class LoginStatusServlet extends HttpServlet {
 
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-      response.setContentType("text/html");
-
       UserService userService = UserServiceFactory.getUserService();
-      if (userService.isUserLoggedIn()){
-          response.getWriter().println("<p>Hello</p>");
+      boolean isUserLoggedIn = userService.isUserLoggedIn();
+
+      Map<String, String> loginStatus = new HashMap<String, String>();
+      loginStatus.put("isUserLoggedIn", String.valueOf(isUserLoggedIn));
+      
+      if (isUserLoggedIn) {
+        loginStatus.put("email", userService.getCurrentUser().getEmail());
+
+        String urlToRedirectToAfterUserLogsOut = "/";
+        loginStatus.put("url", userService.createLogoutURL(urlToRedirectToAfterUserLogsOut));
       } else {
-          response.getWriter().println("<p>Not logged in bro</p>");
-      }
+        loginStatus.put("email", null);
+
+        String urlToRedirectToAfterUserLogsIn = "/";
+        loginStatus.put("url", userService.createLoginURL(urlToRedirectToAfterUserLogsIn));
+    }
+
+    Gson gson = new Gson();
+    String json = gson.toJson(loginStatus);
+    response.setContentType("application/json;");
+    response.getWriter().println(json);
   }
 }
