@@ -153,6 +153,7 @@ function checkLoginStatus(){
         //create hyperlink element to login or logout 
         const linkElement = document.createElement('a');
         linkElement.href = loginStatus.url;
+        linkElement.classList.add('login-link');
 
         //display correct elements based on whether user is logged in or not
         if(boolIsUserLoggedIn){
@@ -165,7 +166,7 @@ function checkLoginStatus(){
 
         //add hyperlink element to DOM
         const loginContainer = document.getElementById('login-container');
-        loginContainer.innerHTML = ""; //clear it first so doesn't duplicate
+        loginContainer.innerHTML = ''; //clear it first so doesn't duplicate
         loginContainer.appendChild(linkElement);
     });
 }
