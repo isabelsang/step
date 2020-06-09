@@ -38,13 +38,9 @@ public class LoginStatusServlet extends HttpServlet {
       loginStatus.put("isUserLoggedIn", String.valueOf(isUserLoggedIn));
       
       if (isUserLoggedIn) {
-        loginStatus.put("email", userService.getCurrentUser().getEmail());
-
         String urlToRedirectToAfterUserLogsOut = "/";
         loginStatus.put("url", userService.createLogoutURL(urlToRedirectToAfterUserLogsOut));
       } else {
-        loginStatus.put("email", null);
-
         String urlToRedirectToAfterUserLogsIn = "/";
         loginStatus.put("url", userService.createLoginURL(urlToRedirectToAfterUserLogsIn));
     }
