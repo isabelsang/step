@@ -153,23 +153,22 @@ button:hover, #comment-submit:hover {
   padding: 10px;
 }
 
-#comment-textarea {
+#comment-textarea, #name-input {
     display: block;
     margin: auto;
     padding: 10px;
     width: 200px;
 }
 
+#name-input {
+  display: block; 
+  margin: auto;
+  width: 200px;
+}
+
 #comment-submit {
   margin-top: 10px;
   width: 100px;
-}
-
-.comment {
-  background-color: #78A4DE;
-  height: 30px;
-  margin: 10px;
-  padding: 10px;
 }
 
 #comment-limit-section {
@@ -188,12 +187,24 @@ button:hover, #comment-submit:hover {
   width: 40px;
 }
 
+.comment {
+  background-color: #78A4DE;
+  margin: 10px;
+  padding: 10px;
+  word-wrap: break-word;
+}
+
+.comment-name {
+  display: inline-block;
+  font-weight: bold;
+}
+
+.comment-message {
+  margin: 0px;
+}
+
 .delete-comment-btn {
   float: right;
   padding: 5px;
   width: 100px;
-}
-
-.comment-message {
-  display: inline;
 }

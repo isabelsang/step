@@ -45,10 +45,11 @@ public class DataServlet extends HttpServlet {
     List<Comment> comments = new ArrayList<Comment>();
     for(Entity entity : results.asIterable(FetchOptions.Builder.withLimit(commentLimit))){
       long id = entity.getKey().getId();
+      String name = (String) entity.getProperty("name");
       String message = (String) entity.getProperty("message");
       long timestamp = (long) entity.getProperty("timestamp");
 
-      Comment comment = new Comment(id, message, timestamp);
+      Comment comment = new Comment(id, name, message, timestamp);
       comments.add(comment);
     }
 
@@ -60,16 +61,18 @@ public class DataServlet extends HttpServlet {
 
   @Override
   public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    String name = request.getParameter("name");
     String message = request.getParameter("message");
     long timestamp = System.currentTimeMillis();
 
     Entity commentEntity = new Entity("Comment");
+    commentEntity.setProperty("name", name);
     commentEntity.setProperty("message", message);
     commentEntity.setProperty("timestamp", timestamp);
 
     DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
     
-    if(message!=null && !message.equals("")){
+    if((message!=null && !message.equals("")) && (name!=null && !name.equals(""))){
       datastore.put(commentEntity);
     }
     response.sendRedirect("/index.html");
