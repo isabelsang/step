@@ -63,7 +63,7 @@ function makeLarger(pic){
 }
 
 /**
- * fetches comments from data servlet
+ * Fetches comments from data servlet
  */
 function getComments(){
     checkLoginStatus();
@@ -127,35 +127,35 @@ function createComment(comment){
     return commentElement;
 }
 
-/** gets user-inputted comment limit  */
+/** Gets user-inputted comment limit  */
 function getCommentLimit(){
     const limit = document.getElementById('comment-limit-select').value;
     return limit;
 }
 
-/** passes server id of comment to delete  */
+/** Passes server id of comment to delete  */
 function deleteComment(comment){
     const params = new URLSearchParams();
     params.append('id', comment.id);
     fetch('/delete-data', {method: 'POST', body: params}).then(getComments());
 }
 
-/** checks if user is logged in or out */
+/** Checks if user is logged in or out */
 function checkLoginStatus(){
     fetch('/login-status').then(response => response.json()).then(loginStatus => {
-        // convert isUserLoggedIn from server from string to bool 
+        // Convert isUserLoggedIn from server from string to bool 
         const stringIsUserLoggedIn = loginStatus.isUserLoggedIn;
         const boolIsUserLoggedIn = (stringIsUserLoggedIn === 'true');
         
-        //get the comment form element to either hide or display 
+        // Get the comment form element to either hide or display 
         const commentFormElement = document.getElementById('comment-form');
 
-        //create hyperlink element to login or logout 
+        // Create hyperlink element to login or logout 
         const linkElement = document.createElement('a');
         linkElement.href = loginStatus.url;
         linkElement.classList.add('login-link');
 
-        //display correct elements based on whether user is logged in or not
+        // Display correct elements based on whether user is logged in or not
         if(boolIsUserLoggedIn){
             linkElement.innerText = 'Logout here';
             commentFormElement.style.display = 'block';
@@ -164,7 +164,7 @@ function checkLoginStatus(){
             commentFormElement.style.display = 'none';
         }
 
-        //add hyperlink element to DOM
+        // Add hyperlink element to DOM
         const loginContainer = document.getElementById('login-container');
         loginContainer.innerHTML = ''; //clear it first so doesn't duplicate
         loginContainer.appendChild(linkElement);
