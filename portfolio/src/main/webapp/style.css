@@ -228,3 +228,8 @@ button:hover, #comment-submit:hover {
   margin-right: 20px;
   width: 75px;
 }
+
+/*--------login to comment feature---------*/
+#comment-form {
+  display: none;
+}
