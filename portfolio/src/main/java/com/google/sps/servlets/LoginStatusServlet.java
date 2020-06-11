@@ -53,4 +53,4 @@ public class LoginStatusServlet extends HttpServlet {
     response.setContentType("application/json;");
     response.getWriter().println(json);
   }
-}
+} 
