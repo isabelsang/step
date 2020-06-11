@@ -66,7 +66,20 @@
       </div>
 
       <div id="chart-section">
-          <h2 id="chart-header">Now I want to get to know you!</h2>
+        <h2 id="chart-header">Now I want to get to know you!</h2>
+        <form action="/survey-data" method="POST">
+          <select name="bfast-survey" id="bfast-survey-select">
+            <option value="Pancakes">Pancakes
+            <option value="Waffles">Waffles
+            <option value="Eggs">Eggs
+            <option value="Bagel">NJ bagel
+            <option value="Oatmeal">Oatmeal
+            <option value="Avocado toast">Avocado toast
+            <option value="Fruit">Fruit
+            <option value="None">I don't eat breakfast
+          </select>
+          <input type="submit"/>
+        </form>
         <div id="chart-container"></div>
       </div>
 
