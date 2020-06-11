@@ -195,6 +195,6 @@ function drawChart() {
     'backgroundColor': 'transparent'
   };
 
-  const chart = new google.visualization.PieChart(document.getElementById('chart-section'));
+  const chart = new google.visualization.PieChart(document.getElementById('chart-container'));
   chart.draw(data, options);
 }
