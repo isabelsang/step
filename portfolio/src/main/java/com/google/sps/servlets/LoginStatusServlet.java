@@ -29,7 +29,7 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet("/login-status")
 public class LoginStatusServlet extends HttpServlet {
   
-  private static final Gson GSON = new Gson();
+  private static final Gson gson = new Gson();
   private static final String URL_REDIRECT_AFTER_LOG_OUT = "/";
   private static final String URL_REDIRECT_AFTER_LOG_IN = "/";
 
@@ -48,8 +48,8 @@ public class LoginStatusServlet extends HttpServlet {
         loginStatus.put("email", null);
         loginStatus.put("url", userService.createLoginURL(URL_REDIRECT_AFTER_LOG_IN));
     }
-    
-    String json = GSON.toJson(loginStatus);
+
+    String json = gson.toJson(loginStatus);
     response.setContentType("application/json;");
     response.getWriter().println(json);
   }
