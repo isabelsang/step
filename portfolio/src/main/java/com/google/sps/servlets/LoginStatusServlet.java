@@ -48,7 +48,7 @@ public class LoginStatusServlet extends HttpServlet {
         loginStatus.put("email", null);
         loginStatus.put("url", userService.createLoginURL(urlToRedirectToAfterUserLogsIn));
     }
-
+ 
     String json = gson.toJson(loginStatus);
     response.setContentType("application/json;");
     response.getWriter().println(json);
