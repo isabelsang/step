@@ -66,6 +66,7 @@ function makeLarger(pic){
  * Fetches comments from data servlet
  */
 function getComments(){
+    checkLoginStatus();
     const commentsContainer = document.getElementById('comments-container');
     commentsContainer.innerHTML = '';
 
@@ -133,4 +134,33 @@ function deleteComment(comment){
     const params = new URLSearchParams();
     params.append('id', comment.id);
     fetch('/delete-data', {method: 'POST', body: params}).then(getComments());
+}
+
+/** checks if user is logged in or out */
+function checkLoginStatus(){
+    fetch('/login-status').then(response => response.json()).then(loginStatus => {
+        // convert isUserLoggedIn from server from string to bool 
+        const stringIsUserLoggedIn = loginStatus.isUserLoggedIn;
+        const boolIsUserLoggedIn = (stringIsUserLoggedIn === 'true');
+        
+        //get the comment form element to either hide or display 
+        const commentFormElement = document.getElementById('comment-form');
+
+        //create hyperlink element to login or logout 
+        const linkElement = document.createElement('a');
+        linkElement.href = loginStatus.url;
+
+        //display correct elements based on whether user is logged in or not
+        if(boolIsUserLoggedIn){
+            linkElement.innerText = 'Logout here';
+            commentFormElement.display = 'block';
+        } else {
+            linkElement.innerText = 'Login here';
+            commentFormElement.display = 'none';
+        }
+
+        //add hyperlink element to DOM
+        const loginContainer = document.getElementById('login-container');
+        loginContainer.appendChild(linkElement);
+    });
 }
