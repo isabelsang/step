@@ -28,6 +28,10 @@ import javax.servlet.http.HttpServletResponse;
 
 @WebServlet("/login-status")
 public class LoginStatusServlet extends HttpServlet {
+  
+  private static final Gson gson = new Gson();
+  private static final String urlToRedirectToAfterUserLogsOut = "/";
+  private static final String urlToRedirectToAfterUserLogsIn = "/";
 
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
@@ -39,17 +43,12 @@ public class LoginStatusServlet extends HttpServlet {
       
       if (isUserLoggedIn) {
         loginStatus.put("email", userService.getCurrentUser().getEmail());
-
-        String urlToRedirectToAfterUserLogsOut = "/";
         loginStatus.put("url", userService.createLogoutURL(urlToRedirectToAfterUserLogsOut));
       } else {
         loginStatus.put("email", null);
-
-        String urlToRedirectToAfterUserLogsIn = "/";
         loginStatus.put("url", userService.createLoginURL(urlToRedirectToAfterUserLogsIn));
     }
 
-    Gson gson = new Gson();
     String json = gson.toJson(loginStatus);
     response.setContentType("application/json;");
     response.getWriter().println(json);
