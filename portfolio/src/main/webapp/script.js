@@ -93,6 +93,10 @@ function createComment(comment){
     nameElement.innerText = comment.name;
     nameElement.classList.add('comment-name');
 
+    const emailElement = document.createElement('p');
+    emailElement.innerText = comment.email;
+    emailElement.classList.add('comment-email');
+
     const messageElement = document.createElement('p');
     messageElement.innerText = comment.message;
     messageElement.classList.add('comment-message');
@@ -113,8 +117,8 @@ function createComment(comment){
     moodElement.classList.add('comment-mood');
 
     textDivElement.appendChild(nameElement);
+    textDivElement.appendChild(emailElement);
     textDivElement.appendChild(messageElement);
-
     commentElement.appendChild(moodElement);
     commentElement.appendChild(textDivElement);
     commentElement.appendChild(deleteBtnElement);
@@ -136,31 +140,33 @@ function deleteComment(comment){
     fetch('/delete-data', {method: 'POST', body: params}).then(getComments());
 }
 
-/** checks if user is logged in or out */
+/** Checks if user is logged in or out */
 function checkLoginStatus(){
     fetch('/login-status').then(response => response.json()).then(loginStatus => {
-        // convert isUserLoggedIn from server from string to bool 
+        // Convert isUserLoggedIn from server from string to bool 
         const stringIsUserLoggedIn = loginStatus.isUserLoggedIn;
         const boolIsUserLoggedIn = (stringIsUserLoggedIn === 'true');
         
-        //get the comment form element to either hide or display 
+        // Get the comment form element to either hide or display 
         const commentFormElement = document.getElementById('comment-form');
 
-        //create hyperlink element to login or logout 
+        // Create hyperlink element to login or logout 
         const linkElement = document.createElement('a');
         linkElement.href = loginStatus.url;
+        linkElement.classList.add('login-link');
 
-        //display correct elements based on whether user is logged in or not
+        // Display correct elements based on whether user is logged in or not
         if(boolIsUserLoggedIn){
             linkElement.innerText = 'Logout here';
-            commentFormElement.display = 'block';
+            commentFormElement.style.display = 'block';
         } else {
             linkElement.innerText = 'Login here';
-            commentFormElement.display = 'none';
+            commentFormElement.style.display = 'none';
         }
 
-        //add hyperlink element to DOM
+        // Add hyperlink element to DOM
         const loginContainer = document.getElementById('login-container');
+        loginContainer.innerHTML = ''; //clear it first so doesn't duplicate
         loginContainer.appendChild(linkElement);
     });
 }

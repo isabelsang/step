@@ -21,6 +21,9 @@ import com.google.appengine.api.datastore.Entity;
 import com.google.appengine.api.datastore.PreparedQuery;
 import com.google.appengine.api.datastore.Query;
 import com.google.appengine.api.datastore.Query.SortDirection;
+import com.google.appengine.api.users.UserService;
+import com.google.appengine.api.users.UserServiceFactory;
+
 import java.util.*;
 import java.io.IOException;
 import com.google.sps.data.Comment;
@@ -49,8 +52,9 @@ public class DataServlet extends HttpServlet {
       String message = (String) entity.getProperty("message");
       long timestamp = (long) entity.getProperty("timestamp");
       String mood = (String) entity.getProperty("mood");
+      String email = (String) entity.getProperty("email");
 
-      Comment comment = new Comment(id, name, message, timestamp, mood);
+      Comment comment = new Comment(id, name, message, timestamp, mood, email);
       comments.add(comment);
     }
 
@@ -66,12 +70,15 @@ public class DataServlet extends HttpServlet {
     String message = request.getParameter("message");
     long timestamp = System.currentTimeMillis();
     String mood = request.getParameter("mood");
+    UserService userService = UserServiceFactory.getUserService();
+    String email = userService.getCurrentUser().getEmail();
 
     Entity commentEntity = new Entity("Comment");
     commentEntity.setProperty("name", name);
     commentEntity.setProperty("message", message);
     commentEntity.setProperty("timestamp", timestamp);
     commentEntity.setProperty("mood", mood);
+    commentEntity.setProperty("email", email);
 
     DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
     
