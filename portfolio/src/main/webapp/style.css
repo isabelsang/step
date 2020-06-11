@@ -107,6 +107,7 @@ button:hover, #comment-submit:hover, .login-link:hover {
 
 #popup {
   background-color: rgba(0,0,0,0.2);
+  color: black;
   display: none;
   height: 100%;
   left: 0;
