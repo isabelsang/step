@@ -12,6 +12,9 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+google.charts.load('current', {'packages':['corechart']});
+google.charts.setOnLoadCallback(drawChart);
+
 /**
  * Adds a random famous person from New Jersey to page.
  */
@@ -169,4 +172,29 @@ function checkLoginStatus(){
         loginContainer.innerHTML = ''; //clear it first so doesn't duplicate
         loginContainer.appendChild(linkElement);
     });
+}
+
+/** Creates chart and displays it */
+function drawChart() {
+  const data = new google.visualization.DataTable();
+  data.addColumn('string', 'Ways to make eggs');
+  data.addColumn('number', 'Count');
+    data.addRows([
+        ['Scrambled', 10],
+        ['Sunny side up', 6],
+        ['Hard boiled', 4],
+        ['In a breakfast sandwich', 7],
+        ['Omelet', 5]
+    ]);
+  
+  const options = {
+    'title': 'Favorite ways to make eggs',
+    'width': 500,
+    'height': 400, 
+    'colors': ['#0F1E3D','#264B96','#366BD6','#3D91F2','#84C0F5'],
+    'backgroundColor': 'transparent'
+  };
+
+  const chart = new google.visualization.PieChart(document.getElementById('chart-section'));
+  chart.draw(data, options);
 }

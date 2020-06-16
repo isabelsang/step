@@ -255,3 +255,9 @@ button:hover, #comment-submit:hover, .login-link:hover {
   width: 100px;
 }
 
+/*-------------chart section--------------*/
+#chart-section {
+  display: block;
+  margin: auto;
+  width: 500px;
+}
