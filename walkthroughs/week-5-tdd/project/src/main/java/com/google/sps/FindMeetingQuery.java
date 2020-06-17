@@ -83,10 +83,10 @@ public final class FindMeetingQuery {
             lastTimeRange = nextTimeRange;
             timeRangesCtr++;
         } else {
-            endOfAvail = nextTimeRange.start() - 1;
+            endOfAvail = nextTimeRange.start();
             if((endOfAvail - startOfAvail) >= duration){
                 //Enough available time for the meeting so add it to the array list
-                availTimes.add(TimeRange.fromStartEnd(startOfAvail, endOfAvail, true));
+                availTimes.add(TimeRange.fromStartEnd(startOfAvail, endOfAvail, false));
             }
 
             lastTimeRange = nextTimeRange;
