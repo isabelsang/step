@@ -93,12 +93,11 @@ public final class FindMeetingQuery {
             startOfAvail = nextTimeRange.end();
             timeRangesCtr++;
         }
-
-        //Check if there is enough time for requested meeting after last event
-        endOfAvail = TimeRange.END_OF_DAY;
-        if((startOfAvail < TimeRange.END_OF_DAY) && ((endOfAvail - startOfAvail) >= duration)){
-           availTimes.add(TimeRange.fromStartEnd(startOfAvail, endOfAvail, true)); 
-        }
+    }
+    //Check if there is enough time for requested meeting after last event
+    endOfAvail = TimeRange.END_OF_DAY;
+    if((startOfAvail < TimeRange.END_OF_DAY) && ((endOfAvail - startOfAvail) >= duration)){
+        availTimes.add(TimeRange.fromStartEnd(startOfAvail, endOfAvail, true)); 
     }
 
     return availTimes;
