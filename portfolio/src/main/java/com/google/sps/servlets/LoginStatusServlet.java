@@ -26,6 +26,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+/** Servlet that returns whether a user is logged in or not and a URL to login/out */
 @WebServlet("/login-status")
 public class LoginStatusServlet extends HttpServlet {
   
