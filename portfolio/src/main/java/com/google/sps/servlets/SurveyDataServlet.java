@@ -14,6 +14,7 @@
 
 package com.google.sps.servlets;
 
+import java.util.*;
 import com.google.gson.Gson;
 import java.io.IOException;
 import java.util.HashMap;
@@ -24,11 +25,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-
+/** Servlet that returns survey data*/
 @WebServlet("/survey-data")
 public class SurveyDataServlet extends HttpServlet {
 
-  private Map<String, Integer> bfastVotes = new HashMap<>();
+  private static Map<String, Integer> bfastVotes = new HashMap<>();
   private static final Gson GSON = new Gson();
 
   @Override
@@ -42,12 +43,7 @@ public class SurveyDataServlet extends HttpServlet {
   public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
     String bfast = request.getParameter("bfast-survey");
     
-    int currentVotes;
-    if(bfastVotes.containsKey(bfast)){
-        currentVotes = bfastVotes.get(bfast);
-    } else {
-        currentVotes = 0;
-    }
+    int currentVotes = bfastVotes.getOrDefault(bfast, 0);
     bfastVotes.put(bfast, currentVotes + 1);
 
     response.sendRedirect("/index.html");
