@@ -75,12 +75,11 @@ public final class FindMeetingQuery {
 
     while(startOfAvail < TimeRange.END_OF_DAY && timeRangesCtr < timeRanges.size()){ 
         nextTimeRange = timeRanges.get(timeRangesCtr);
-
-        if((null != lastTimeRange) && (lastTimeRange.overlaps(nextTimeRange))) {
-            startOfAvail = nextTimeRange.end();
-            timeRangesCtr++;
-        } else if ((null != lastTimeRange) && (lastTimeRange.contains(nextTimeRange))){
+        if ((null != lastTimeRange) && (lastTimeRange.contains(nextTimeRange))){
             lastTimeRange = nextTimeRange;
+            timeRangesCtr++;
+        } else if((null != lastTimeRange) && (lastTimeRange.overlaps(nextTimeRange))) {
+            startOfAvail = nextTimeRange.end();
             timeRangesCtr++;
         } else {
             endOfAvail = nextTimeRange.start();
