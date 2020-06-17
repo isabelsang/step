@@ -107,6 +107,7 @@ button:hover, #comment-submit:hover, .login-link:hover {
 
 #popup {
   background-color: rgba(0,0,0,0.2);
+  color: black;
   display: none;
   height: 100%;
   left: 0;
@@ -257,7 +258,16 @@ button:hover, #comment-submit:hover, .login-link:hover {
 
 /*-------------chart section--------------*/
 #chart-section {
+  background-color: #BCD0EB;
+  margin-top: 10px;
+  padding: 10px;
+  text-align: center;
+}
+
+#chart-container {
   display: block;
   margin: auto;
   width: 500px;
 }
+
+
