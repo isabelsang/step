@@ -185,15 +185,25 @@ function drawChart() {
         data.addRow([bfast, bfastVotes[bfast]]);
     });
 
+    const view = new google.visualization.DataView(data); //DataView allows selection of a subset of the columns
+    view.setColumns([0, 1, {
+      role: 'style',
+      type: 'string',
+      calc: function (dt, row) {
+          return options.colors[row]
+      } //"calc" calls a function on each of the rows
+        
+    }]);
+    
     const options = {
         'title': 'Favorite breakfast',
-        'width': 500,
+        'width': 600,
         'height': 400, 
-        'colors': ['#0F1E3D','#264B96','#366BD6','#3D91F2','#84C0F5'],
+        'colors': ['#0F1E3D','#264B96','#366BD6','#608CC4','#3D91F2','#84C0F5', 'B1D7FF'],
         'backgroundColor': 'transparent'
     };
 
     const chart = new google.visualization.ColumnChart(document.getElementById('chart-container'));
-    chart.draw(data, options);
+    chart.draw(view, options);
   }); 
 }

@@ -26,7 +26,7 @@ h1, h2 {
 }
 
 /*--------  buttons and hyperlinks -------*/
-button, #comment-submit, .login-link {
+button, #comment-submit, .login-link, #survey-submit {
   background-color: #3071C7;
   border:none;
   border-radius: 4px;
@@ -40,7 +40,7 @@ button, #comment-submit, .login-link {
   width: 200px;
 }
 
-button:hover, #comment-submit:hover, .login-link:hover {
+button:hover, #comment-submit:hover, .login-link:hover, #survey-submit:hover{
   background-color: #112745;
 }
 
@@ -176,7 +176,7 @@ button:hover, #comment-submit:hover, .login-link:hover {
   width: 200px;
 }
 
-#comment-submit {
+#comment-submit, #survey-submit {
   margin-top: 10px;
   width: 100px;
 }
@@ -267,7 +267,7 @@ button:hover, #comment-submit:hover, .login-link:hover {
 #chart-container {
   display: block;
   margin: auto;
-  width: 500px;
+  width: 600px;
 }
 
 
