@@ -23,8 +23,17 @@ import java.util.HashSet;
 
 public final class FindMeetingQuery {
   public Collection<TimeRange> query(Collection<Event> events, MeetingRequest request) {
-    Collection<String> attendees = request.getAttendees();
+    Collection<String> mandatory = request.getAttendees();
+    Collection<String> optional = request.getOptionalAttendees();
+    Collection<String> attendees = mandatory; 
     long duration = request.getDuration();
+
+    boolean optionalAttendeesInRequest = true;
+    if(optional.isEmpty()){
+        optionalAttendeesInRequest = false;
+    } else {
+        attendees.addAll(optional);
+    }
 
     //Case in which the requested meeting has no attendies
     if(attendees.isEmpty()){
@@ -36,7 +45,7 @@ public final class FindMeetingQuery {
         return Arrays.asList();
     } 
 
-    //List of time ranges of other events that attendees are attending
+    //List of time ranges of events that attendees are attending
     List<TimeRange> timeRanges = new ArrayList<TimeRange>();
     TimeRange currentRange;
     for(String person : attendees){
@@ -99,6 +108,12 @@ public final class FindMeetingQuery {
         availTimes.add(TimeRange.fromStartEnd(startOfAvail, endOfAvail, true)); 
     }
 
-    return availTimes;
+    if(optionalAttendeesInRequest && availTimes.isEmpty()){
+        //If attempt to include optional attendees resulted in no time slots, try with just mandatory attendees
+        return query(events, new MeetingRequest(mandatory, duration));
+    } else {
+        return availTimes;
+    }
   }
+
 }
