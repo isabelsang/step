@@ -207,3 +207,11 @@ function drawChart() {
     chart.draw(view, options);
   }); 
 }
+
+function capstone(){
+    fetch('https://aggregator-data.artic.edu/api/v1/artworks/249689?limit=2')
+    .then(response => response.json()).then((data) => {
+    console.log(data.data.description);
+    });
+    
+}
