@@ -20,6 +20,8 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.stream.*;
+import java.util.stream.Collectors;
 
 public final class FindMeetingQuery {
   public Collection<TimeRange> query(Collection<Event> events, MeetingRequest request) {
@@ -36,24 +38,16 @@ public final class FindMeetingQuery {
         return Arrays.asList();
     } 
 
-    //List of time ranges of other events that attendees are attending
-    List<TimeRange> timeRanges = new ArrayList<TimeRange>();
-    TimeRange currentRange;
-    for(String person : attendees){
-        for(Event event: events){
-            currentRange = event.getWhen();
-            if(event.getAttendees().contains(person) && !timeRanges.contains(currentRange)){
-                timeRanges.add(currentRange);
-            }
-        }
-    }
+    //only are concerned with events that attendees are going to 
+    Collection<TimeRange> timeRangesSet = getRelevantEvents(attendees, events);
 
     //Case in which no events on calendar so no conflicts
-    if(timeRanges.isEmpty()){
+    if(timeRangesSet.isEmpty()){
         return Arrays.asList(TimeRange.WHOLE_DAY);
     }
 
-    //Sort timeRanges by starting time 
+    //Change to ArrayList and sort timeRanges by starting time 
+    List<TimeRange> timeRanges = new ArrayList<TimeRange>(timeRangesSet);
     Collections.sort(timeRanges, TimeRange.ORDER_BY_START);
 
     Collection<TimeRange> availTimes = new ArrayList<TimeRange>(); //Time ranges that are available for the meeting request
@@ -100,5 +94,20 @@ public final class FindMeetingQuery {
     }
 
     return availTimes;
+  }
+
+  //Returns time ranges of other events that attendees are attending
+  public Collection<TimeRange> getRelevantEvents(Collection<String> attendees, Collection<Event> events){
+      
+    Collection<TimeRange> timeRangesSet = new HashSet<TimeRange>();
+
+    events.stream()
+          .filter(
+            event -> attendees.stream()
+                        .anyMatch(person -> event.getAttendees().contains(person))
+            )
+          .forEach(event -> timeRangesSet.add(event.getWhen()));
+
+    return timeRangesSet;
   }
 }

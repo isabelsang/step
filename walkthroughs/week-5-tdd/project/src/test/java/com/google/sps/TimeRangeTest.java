@@ -14,7 +14,7 @@
 
 package com.google.sps;
 
-import org.junit.Assert;
+import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -25,21 +25,21 @@ import org.junit.runners.JUnit4;
 public final class TimeRangeTest {
   @Test
   public void equality() {
-    Assert.assertEquals(TimeRange.fromStartDuration(100, 50), TimeRange.fromStartDuration(100, 50));
+    assertEquals(TimeRange.fromStartDuration(100, 50), TimeRange.fromStartDuration(100, 50));
 
-    Assert.assertNotEquals(
+    assertNotEquals(
         TimeRange.fromStartDuration(100, 50), TimeRange.fromStartDuration(100, 51));
 
-    Assert.assertEquals(
+    assertEquals(
         TimeRange.fromStartDuration(100, 50), TimeRange.fromStartEnd(100, 150, false));
 
-    Assert.assertNotEquals(
+    assertNotEquals(
         TimeRange.fromStartDuration(100, 50), TimeRange.fromStartEnd(100, 150, true));
 
-    Assert.assertEquals(
+    assertEquals(
         TimeRange.fromStartDuration(100, 51), TimeRange.fromStartEnd(100, 150, true));
 
-    Assert.assertEquals(
+    assertEquals(
         TimeRange.fromStartEnd(100, 151, false), TimeRange.fromStartEnd(100, 150, true));
   }
 
@@ -47,10 +47,10 @@ public final class TimeRangeTest {
   public void containsPoint() {
     // Range 100 (inclusive) to 150 (exclusive).
     TimeRange range = TimeRange.fromStartDuration(100, 50);
-    Assert.assertFalse(range.contains(50));
-    Assert.assertTrue(range.contains(100));
-    Assert.assertFalse(range.contains(150));
-    Assert.assertFalse(range.contains(200));
+    assertFalse(range.contains(50));
+    assertTrue(range.contains(100));
+    assertFalse(range.contains(150));
+    assertFalse(range.contains(200));
   }
 
   @Test
@@ -58,38 +58,38 @@ public final class TimeRangeTest {
     TimeRange range = TimeRange.fromStartDuration(200, 50);
 
     // |---|   |--range--|
-    Assert.assertFalse(range.contains(TimeRange.fromStartDuration(0, 20)));
+    assertFalse(range.contains(TimeRange.fromStartDuration(0, 20)));
 
     //     |--range--|
     // |---|
-    Assert.assertFalse(range.contains(TimeRange.fromStartDuration(180, 20)));
+    assertFalse(range.contains(TimeRange.fromStartDuration(180, 20)));
 
     //   |--range--|
     // |---|
-    Assert.assertFalse(range.contains(TimeRange.fromStartDuration(190, 20)));
+    assertFalse(range.contains(TimeRange.fromStartDuration(190, 20)));
 
     // |--range--|
     // |---|
-    Assert.assertTrue(range.contains(TimeRange.fromStartDuration(200, 20)));
+    assertTrue(range.contains(TimeRange.fromStartDuration(200, 20)));
 
     // |--range--|
     //    |---|
-    Assert.assertTrue(range.contains(TimeRange.fromStartDuration(210, 20)));
+    assertTrue(range.contains(TimeRange.fromStartDuration(210, 20)));
 
     // |--range--|
     //       |---|
-    Assert.assertTrue(range.contains(TimeRange.fromStartDuration(230, 20)));
+    assertTrue(range.contains(TimeRange.fromStartDuration(230, 20)));
 
     // |--range--|
     //         |---|
-    Assert.assertFalse(range.contains(TimeRange.fromStartDuration(240, 20)));
+    assertFalse(range.contains(TimeRange.fromStartDuration(240, 20)));
 
     // |--range--|
     //           |---|
-    Assert.assertFalse(range.contains(TimeRange.fromStartDuration(250, 20)));
+    assertFalse(range.contains(TimeRange.fromStartDuration(250, 20)));
 
     // |--range--| |---|
-    Assert.assertFalse(range.contains(TimeRange.fromStartDuration(260, 20)));
+    assertFalse(range.contains(TimeRange.fromStartDuration(260, 20)));
   }
 
   @Test
@@ -97,58 +97,58 @@ public final class TimeRangeTest {
     TimeRange range = TimeRange.fromStartDuration(200, 50);
 
     // |---|   |--range--|
-    Assert.assertFalse(range.overlaps(TimeRange.fromStartDuration(0, 20)));
+    assertFalse(range.overlaps(TimeRange.fromStartDuration(0, 20)));
 
     //     |--range--|
     // |---|
-    Assert.assertFalse(range.overlaps(TimeRange.fromStartDuration(180, 20)));
+    assertFalse(range.overlaps(TimeRange.fromStartDuration(180, 20)));
 
     //   |--range--|
     // |---|
-    Assert.assertTrue(range.overlaps(TimeRange.fromStartDuration(190, 20)));
+    assertTrue(range.overlaps(TimeRange.fromStartDuration(190, 20)));
 
     // |--range--|
     // |---|
-    Assert.assertTrue(range.overlaps(TimeRange.fromStartDuration(200, 20)));
+    assertTrue(range.overlaps(TimeRange.fromStartDuration(200, 20)));
 
     // |--range--|
     //    |---|
-    Assert.assertTrue(range.overlaps(TimeRange.fromStartDuration(210, 20)));
+    assertTrue(range.overlaps(TimeRange.fromStartDuration(210, 20)));
 
     // |--range--|
     //       |---|
-    Assert.assertTrue(range.overlaps(TimeRange.fromStartDuration(230, 20)));
+    assertTrue(range.overlaps(TimeRange.fromStartDuration(230, 20)));
 
     // |--range--|
     //         |---|
-    Assert.assertTrue(range.overlaps(TimeRange.fromStartDuration(240, 20)));
+    assertTrue(range.overlaps(TimeRange.fromStartDuration(240, 20)));
 
     // |--range--|
     //           |---|
-    Assert.assertFalse(range.overlaps(TimeRange.fromStartDuration(250, 20)));
+    assertFalse(range.overlaps(TimeRange.fromStartDuration(250, 20)));
 
     // |--range--| |---|
-    Assert.assertFalse(range.overlaps(TimeRange.fromStartDuration(260, 20)));
+    assertFalse(range.overlaps(TimeRange.fromStartDuration(260, 20)));
   }
 
   @Test
   public void rangeContainsSelf() {
     TimeRange range = TimeRange.fromStartDuration(100, 100);
-    Assert.assertTrue(range.contains(range));
+    assertTrue(range.contains(range));
   }
 
   @Test
   public void rangeOverlapsSelf() {
     TimeRange range = TimeRange.fromStartDuration(100, 100);
-    Assert.assertTrue(range.overlaps(range));
+    assertTrue(range.overlaps(range));
   }
 
   @Test
   public void emptyRangeContainsNothing() {
     TimeRange range = TimeRange.fromStartDuration(100, 0);
 
-    Assert.assertFalse(range.contains(100));
-    Assert.assertFalse(range.contains(range));
+    assertFalse(range.contains(100));
+    assertFalse(range.contains(range));
   }
 
   @Test
@@ -160,9 +160,9 @@ public final class TimeRangeTest {
     TimeRange emptyMiddle = TimeRange.fromStartDuration(150, 0);
     TimeRange emptyEnd = TimeRange.fromStartDuration(200, 0);
 
-    Assert.assertTrue(range.contains(emptyStart));
-    Assert.assertTrue(range.contains(emptyMiddle));
-    Assert.assertTrue(range.contains(emptyEnd));
+    assertTrue(range.contains(emptyStart));
+    assertTrue(range.contains(emptyMiddle));
+    assertTrue(range.contains(emptyEnd));
   }
 
   @Test
@@ -174,14 +174,14 @@ public final class TimeRangeTest {
     TimeRange emptyMiddle = TimeRange.fromStartDuration(150, 0);
     TimeRange emptyEnd = TimeRange.fromStartDuration(200, 0);
 
-    Assert.assertTrue(range.overlaps(emptyStart));
-    Assert.assertTrue(range.overlaps(emptyMiddle));
-    Assert.assertTrue(range.overlaps(emptyEnd));
+    assertTrue(range.overlaps(emptyStart));
+    assertTrue(range.overlaps(emptyMiddle));
+    assertTrue(range.overlaps(emptyEnd));
 
     // Overlaps is commutative, meaning that regardless of order, the result should be the same.
     // There for "a overlaps b" should be the same as "b overlaps a".
-    Assert.assertTrue(emptyStart.overlaps(range));
-    Assert.assertTrue(emptyMiddle.overlaps(range));
-    Assert.assertTrue(emptyEnd.overlaps(range));
+    assertTrue(emptyStart.overlaps(range));
+    assertTrue(emptyMiddle.overlaps(range));
+    assertTrue(emptyEnd.overlaps(range));
   }
 }
