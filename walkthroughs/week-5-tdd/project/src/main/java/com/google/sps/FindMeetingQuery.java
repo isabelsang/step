@@ -64,6 +64,7 @@ public final class FindMeetingQuery {
     TimeRange lastTimeRange = timeRanges.get(0); //Last time range that has been accounted for from timeRanges
     TimeRange nextTimeRange; //Next time range that needs to be accounted for
     int timeRangesCtr = 1; 
+
     //timeRangesCtr: Index of current position in array list "timeRanges", 
     //start at 1 since timeRange at index 0 is dummy and 
     //has already been accounted for
