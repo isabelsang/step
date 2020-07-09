@@ -20,6 +20,8 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.stream.*;
+import java.util.stream.Collectors;
 
 public final class FindMeetingQuery {
   public Collection<TimeRange> query(Collection<Event> events, MeetingRequest request) {
@@ -45,49 +47,35 @@ public final class FindMeetingQuery {
         return Arrays.asList();
     } 
 
-    //List of time ranges of events that attendees are attending
-    List<TimeRange> timeRanges = new ArrayList<TimeRange>();
-    TimeRange currentRange;
-    for(String person : attendees){
-        for(Event event: events){
-            currentRange = event.getWhen();
-            if(event.getAttendees().contains(person) && !timeRanges.contains(currentRange)){
-                timeRanges.add(currentRange);
-            }
-        }
-    }
+    //only are concerned with events that attendees are going to 
+    Collection<TimeRange> timeRangesSet = getRelevantEvents(attendees, events);
 
     //Case in which no events on calendar so no conflicts
-    if(timeRanges.isEmpty()){
+    if(timeRangesSet.isEmpty()){
         return Arrays.asList(TimeRange.WHOLE_DAY);
     }
 
-    //Sort timeRanges by starting time 
+    List<TimeRange> timeRanges = new ArrayList<TimeRange>(timeRangesSet);
+    addDummyEvents(timeRanges);
     Collections.sort(timeRanges, TimeRange.ORDER_BY_START);
 
     Collection<TimeRange> availTimes = new ArrayList<TimeRange>(); //Time ranges that are available for the meeting request
-    int startOfAvail = TimeRange.START_OF_DAY; //The start of an available time range
+    
+    TimeRange lastTimeRange = timeRanges.get(0); //Last time range that has been accounted for from timeRanges
+    TimeRange nextTimeRange; //Next time range that needs to be accounted for
+    int timeRangesCtr = 1; 
+    //timeRangesCtr: Index of current position in array list "timeRanges", 
+    //start at 1 since timeRange at index 0 is dummy and 
+    //has already been accounted for
+    int startOfAvail = lastTimeRange.end();
     int endOfAvail; 
-    int timeRangesCtr = 0; //Index of current position in array list "timeRanges"
-    TimeRange lastTimeRange = null; //Last time range that has been accounted for from timeRanges
-    TimeRange nextTimeRange = timeRanges.get(0);; //Next time range that needs to be accounted for
-
-    if(nextTimeRange.start() == TimeRange.START_OF_DAY){
-        //If earliest event starts at 00:00 then update startOfAvail 
-        //to be the end time of the first event
-        startOfAvail = nextTimeRange.end();
-
-        //First event is accounted for, so update lastTimeRange
-        lastTimeRange = nextTimeRange;
-        timeRangesCtr++;
-    } 
 
     while(startOfAvail < TimeRange.END_OF_DAY && timeRangesCtr < timeRanges.size()){ 
         nextTimeRange = timeRanges.get(timeRangesCtr);
-        if ((null != lastTimeRange) && (lastTimeRange.contains(nextTimeRange))){
+        if (lastTimeRange.contains(nextTimeRange)){
             lastTimeRange = nextTimeRange;
             timeRangesCtr++;
-        } else if((null != lastTimeRange) && (lastTimeRange.overlaps(nextTimeRange))) {
+        } else if(lastTimeRange.overlaps(nextTimeRange)) {
             startOfAvail = nextTimeRange.end();
             timeRangesCtr++;
         } else {
@@ -102,11 +90,6 @@ public final class FindMeetingQuery {
             timeRangesCtr++;
         }
     }
-    //Check if there is enough time for requested meeting after last event
-    endOfAvail = TimeRange.END_OF_DAY;
-    if((startOfAvail < TimeRange.END_OF_DAY) && ((endOfAvail - startOfAvail) >= duration)){
-        availTimes.add(TimeRange.fromStartEnd(startOfAvail, endOfAvail, true)); 
-    }
 
     if(optionalAttendeesInRequest && availTimes.isEmpty()){
         //If attempt to include optional attendees resulted in no time slots, try with just mandatory attendees
@@ -116,4 +99,24 @@ public final class FindMeetingQuery {
     }
   }
 
+  //Returns time ranges of other events that attendees are attending
+  public Collection<TimeRange> getRelevantEvents(Collection<String> attendees, Collection<Event> events){
+      
+    Collection<TimeRange> timeRangesSet = new HashSet<TimeRange>();
+
+    events.stream()
+          .filter(
+            event -> attendees.stream()
+                        .anyMatch(person -> event.getAttendees().contains(person))
+            )
+          .forEach(event -> timeRangesSet.add(event.getWhen()));
+
+    return timeRangesSet;
+  }
+
+  public List<TimeRange> addDummyEvents(List<TimeRange> timeRanges){
+    timeRanges.add(TimeRange.fromStartDuration(TimeRange.START_OF_DAY, 0));
+    timeRanges.add(TimeRange.fromStartDuration(TimeRange.END_OF_DAY + 1, 0));
+    return timeRanges;
+  }
 }

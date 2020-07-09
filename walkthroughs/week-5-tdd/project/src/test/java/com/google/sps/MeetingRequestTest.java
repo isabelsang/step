@@ -19,7 +19,7 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
-import org.junit.Assert;
+import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -42,6 +42,6 @@ public final class MeetingRequestTest {
 
     int actual = request.getOptionalAttendees().size();
     int expected = 0;
-    Assert.assertEquals(expected, actual);
+    assertEquals(expected, actual);
   }
 }

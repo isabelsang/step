@@ -14,7 +14,7 @@
 
 package com.google.sps;
 
-import org.junit.Assert;
+import static org.junit.Assert.*;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
@@ -28,7 +28,7 @@ public final class GreeterTest {
 
     String greeting = greeter.greet("Ada");
 
-    Assert.assertEquals("Hello Ada", greeting);
+    assertEquals("Hello Ada", greeting);
   }
 
   @Test
@@ -38,6 +38,6 @@ public final class GreeterTest {
     String greeting = greeter.greet("   Ada   ");
 
     // Whitespace should be trimmed
-    Assert.assertEquals("Hello Ada", greeting);
+    assertEquals("Hello Ada", greeting);
   }
 }
