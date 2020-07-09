@@ -25,8 +25,17 @@ import java.util.stream.Collectors;
 
 public final class FindMeetingQuery {
   public Collection<TimeRange> query(Collection<Event> events, MeetingRequest request) {
-    Collection<String> attendees = request.getAttendees();
+    Collection<String> mandatory = request.getAttendees();
+    Collection<String> optional = request.getOptionalAttendees();
+    Collection<String> attendees = mandatory; 
     long duration = request.getDuration();
+
+    boolean optionalAttendeesInRequest = true;
+    if(optional.isEmpty()){
+        optionalAttendeesInRequest = false;
+    } else {
+        attendees.addAll(optional);
+    }
 
     //Case in which the requested meeting has no attendies
     if(attendees.isEmpty()){
@@ -55,18 +64,19 @@ public final class FindMeetingQuery {
     TimeRange lastTimeRange = timeRanges.get(0); //Last time range that has been accounted for from timeRanges
     TimeRange nextTimeRange; //Next time range that needs to be accounted for
     int timeRangesCtr = 1; 
-        //Index of current position in array list "timeRanges", 
-        //start at 1 since timeRange at index 0 is dummy and 
-        //has already been accounted for
+
+    //timeRangesCtr: Index of current position in array list "timeRanges", 
+    //start at 1 since timeRange at index 0 is dummy and 
+    //has already been accounted for
     int startOfAvail = lastTimeRange.end();
     int endOfAvail; 
 
     while(startOfAvail < TimeRange.END_OF_DAY && timeRangesCtr < timeRanges.size()){ 
         nextTimeRange = timeRanges.get(timeRangesCtr);
-        if ((lastTimeRange.contains(nextTimeRange))){
+        if (lastTimeRange.contains(nextTimeRange)){
             lastTimeRange = nextTimeRange;
             timeRangesCtr++;
-        } else if((lastTimeRange.overlaps(nextTimeRange))) {
+        } else if(lastTimeRange.overlaps(nextTimeRange)) {
             startOfAvail = nextTimeRange.end();
             timeRangesCtr++;
         } else {
@@ -82,7 +92,12 @@ public final class FindMeetingQuery {
         }
     }
 
-    return availTimes;
+    if(optionalAttendeesInRequest && availTimes.isEmpty()){
+        //If attempt to include optional attendees resulted in no time slots, try with just mandatory attendees
+        return query(events, new MeetingRequest(mandatory, duration));
+    } else {
+        return availTimes;
+    }
   }
 
   //Returns time ranges of other events that attendees are attending
@@ -102,7 +117,7 @@ public final class FindMeetingQuery {
 
   public List<TimeRange> addDummyEvents(List<TimeRange> timeRanges){
     timeRanges.add(TimeRange.fromStartDuration(TimeRange.START_OF_DAY, 0));
-    timeRanges.add(TimeRange.fromStartDuration(TimeRange.END_OF_DAY+1, 0));
+    timeRanges.add(TimeRange.fromStartDuration(TimeRange.END_OF_DAY + 1, 0));
     return timeRanges;
   }
 }
